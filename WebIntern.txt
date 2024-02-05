@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Techy Software Website</title>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+  }
+
+  .container {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .page {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: transform 0.5s ease;
+  }
+
+  /* Styling for individual pages */
+  #page1 {
+    background-color: #333;
+    color: white;
+  }
+
+  #page2 {
+    background-color: #555;
+    color: white;
+    transform: translateX(100%);
+  }
+
+  #page3 {
+    background-color: #777;
+    color: white;
+    transform: translateX(200%);
+  }
+
+  #page4 {
+    background-color: #999;
+    color: white;
+    transform: translateX(300%);
+  }
+
+  #page5 {
+    background-color: #bbb;
+    color: white;
+    transform: translateX(400%);
+  }
+
+  /* Button container styling */
+  .btn-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  /* Button styling */
+  .btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn:hover {
+    background-color: #0056b3;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <!-- Page 1: Home -->
+  <div id="page1" class="page">
+    <h1>Welcome to Techy Software</h1>
+    <p>We provide innovative software solutions to empower your business.</p>
+    <div class="btn-container">
+      <button class="btn" onclick="slideTo('page2')">Learn More</button>
+    </div>
+  </div>
+
+  <!-- Page 2: About -->
+  <div id="page2" class="page">
+    <h1>About Us</h1>
+    <p>We are a team of skilled software engineers.</p>
+    <div class="btn-container">
+      <button class="btn" onclick="slideTo('page1')">Go Back</button>
+      <button class="btn" onclick="slideTo('page3')">Next</button>
+    </div>
+  </div>
+
+  <!-- Page 3: Services -->
+  <div id="page3" class="page">
+    <h1>Our Services</h1>
+    <p>We offer a wide range of software services.</p>
+      <p>1. Custom Software Development</p>
+      <p>2. Web Application Development</p>
+    <div class="btn-container">
+      <button class="btn" onclick="slideTo('page2')">Go Back</button>
+      <button class="btn" onclick="slideTo('page4')">Next</button>
+    </div>
+  </div>
+
+  <!-- Page 4: Team -->
+  <div id="page4" class="page">
+    <h1>Our Team</h1>
+    <p>Meet our talented team of software professionals.</p>
+    <p> John David</p>
+    <p> Smith </p>
+    <div class="btn-container">
+      <button class="btn" onclick="slideTo('page3')">Go Back</button>
+      <button class="btn" onclick="slideTo('page5')">Next</button>
+    </div>
+  </div>
+
+  <!-- Page 5: Contact Us -->
+  <div id="page5" class="page">
+    <h1>Contact Us</h1>
+    <p>Get in touch with us for any inquiries or assistance.</p>
+    <form>
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">Your Message:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+            <button type="submit" class="btn">Send Message</button>
+        </form>
+    <div class="btn-container">
+      <button class="btn" onclick="slideTo('page4')">Go Back</button>
+      <button class="btn" onclick="slideTo('page1')">Home</button>
+    </div>
+  </div>
+</div>
+
+    <div class="btn-container">
+      <button class="btn" onclick="slideTo('page4')">Go Back</button>
+      <button class="btn" onclick="slideTo('page1')">Home</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function slideTo(pageId) {
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(page => {
+      if (page.id === pageId) {
+        page.style.transform = 'translateX(0)';
+      } else {
+        page.style.transform = `translateX(${calculateTranslate(pageId, page)})`;
+      }
+    });
+  }
+
+  function calculateTranslate(pageId, page) {
+    const currentPage = document.getElementById(pageId);
+    const currentPageIndex = Array.from(currentPage.parentElement.children).indexOf(currentPage);
+    const targetPageIndex = Array.from(page.parentElement.children).indexOf(page);
+    const translateX = (currentPageIndex - targetPageIndex) * 100 + '%';
+    return translateX;
+  }
+</script>
+</body>
+</html>
